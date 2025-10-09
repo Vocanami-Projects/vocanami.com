@@ -17,6 +17,10 @@
     --step-2: 1.563rem;  /* 25px */
     --step-3: 1.953rem;  /* 31px */
     --step-4: 2.441rem;  /* 39px */
+
+    /* リンク用の色を追加 */
+    --link-color: #0056b3;       /* 視認性の高い青色 */
+    --link-hover-color: #8a2be2; /* ホバー時の明るい紫色 */
 }
 
 /* スムーズスクロールと基本フォントサイズ */
@@ -33,7 +37,14 @@ body {
     background: linear-gradient(135deg, var(--thirdary-color) 0%, var(--secondary-color) 100%);
     min-height: 100vh;
 }
-a { text-decoration: none; color: inherit; }
+a {
+    color: var(--link-color);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px; /* 下線と文字の間に少し隙間を作る */
+    transition: color 0.2s ease-in-out; /* 色の変化を滑らかに */
+}
+a:hover { color: var(--link-hover-color); }
 ul { list-style: none; }
 
 /* --- 見出しの相対的サイズ設定 --- */
