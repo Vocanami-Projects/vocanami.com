@@ -2,50 +2,23 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 /*サイトの色は、湘南色(藍色のRGB値)を使う*/
-:root {
-    --primary-color: #0000FF;
-}
+:root { --primary-color: #0000FF; }
 
 /* 全体的なスタイル */
-body {  
-    font-family: sans-serif;
-    line-height: 1.6;
-    color: #333;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
+body { font-family: sans-serif; line-height: 1.6; color: #333; }
+a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 
-/*ヘッダー*/
-.header {
-    background-color: var(--primary-color);
-    color: #fff;
-}
-
-/*メイン*/
-.main {
-    background-color: #fff;
-    color: #000;
-}
-
-/*フッター*/
-.footer {
-    background-color: var(--primary-color);
-    color: #fff;
-}
-
-/*ボタン*/
-.button {
-    background-color: var(--primary-color);
-    color: #fff;
-}
-
+/* ヘッダー */
+header { background-color: var(--primary-color); padding: 1rem 2rem; border-bottom: 1px solid #eee; }
+.header-inner { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+nav ul { display: flex; gap: 1.5rem; }
 
 /*ボタンを押した時のエフェクト*/
-.button:active {
-    background-color: #000;
-    color: #fff;
-}
+.button:active { background-color: #000; color: #fff; }
+
+/* メイン */
+main { padding: 2rem; }
+
+/* フッター */
+footer { background-color: var(--primary-color); padding: 1rem 2rem; text-align: center; }
