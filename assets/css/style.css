@@ -52,7 +52,7 @@ main h2 {
 main h3 {
     font-size: 1.2rem;
     color: var(--word-color);
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 main img {
@@ -62,14 +62,30 @@ main img {
     border-radius: 10px;
 }
 
-.news-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    border: 1px solid var(--thirdary-color);
+main ul {
+    list-style: inside;
+    padding-left: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.news-list li {
+    list-style: inside;
+    padding-left: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    border: 2px solid var(--word-color);
     border-radius: 10px;
     padding: 1rem;
 }
+
+
+
+
+
+
+
+
 
 
 
