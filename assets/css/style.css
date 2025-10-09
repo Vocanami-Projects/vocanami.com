@@ -29,7 +29,7 @@ footer {
 /* ---------------
  * コンテンツ共通
  * --------------- */
- .container {
+.container {
     max-width: 900px;
     margin: 0 auto;
     padding: 0 1rem;
@@ -52,8 +52,46 @@ main h2 {
 main h3 {
     font-size: 1.2rem;
     color: var(--word-color);
+    margin-bottom: 1rem;
+}
+
+main img {
+    max-width: 50%;
+    height: auto;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+}
+
+main ul {
+    list-style: inside;
+    padding-left: 1rem;
+    margin-top: 1rem;
     margin-bottom: 2rem;
 }
+
+.news-list li {
+    list-style: inside;
+    padding-left: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    border: 2px solid var(--word-color);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ---------------
  * タブ切り替えコンテンツ
@@ -100,4 +138,42 @@ main h3 {
 
 .tab-content.active {
     display: block; /* activeクラスがついたら表示 */
+}
+
+/* ---------------
+ * トップへ戻るボタン
+ * --------------- */
+/* スムーズスクロールを有効にする */
+html {
+    scroll-behavior: smooth;
+}
+
+.back-to-top-button {
+    /* 常に画面の右下に固定 */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    /* 見た目の設定 */
+    background-color: var(--word-color);
+    color: var(--secondary-color);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* 円形にする */
+    text-align: center;
+    line-height: 50px; /* 上下中央揃え */
+    font-size: 1.2rem;
+
+    /* 最初は非表示にしておく */
+    opacity: 0;
+    visibility: hidden;
+
+    /* 表示・非表示を滑らかに変化させる */
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+/* JSによってこのクラスが付与されると表示される */
+.back-to-top-button.is-visible {
+    opacity: 1;
+    visibility: visible;
 }
