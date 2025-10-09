@@ -10,17 +10,13 @@
     --thirdary-color: #f0efc9;
     --card-bg: rgba(255, 255, 255, 0.6);
 
-    /* ✨ リンク用の色を追加 */
-    --link-color: #0056b3; /* 視認性の高い青色 */
-    --link-hover-color: #8a2be2; /* ホバー時の明るい紫色 */
-
     /* 基準となるタイポグラフィスケール */
-    --step--1: 0.8rem;
-    --step-0: 1rem;
-    --step-1: 1.25rem;
-    --step-2: 1.563rem;
-    --step-3: 1.953rem;
-    --step-4: 2.441rem;
+    --step--1: 0.8rem;   /* 12.8px */
+    --step-0: 1rem;      /* 16px (基準) */
+    --step-1: 1.25rem;   /* 20px */
+    --step-2: 1.563rem;  /* 25px */
+    --step-3: 1.953rem;  /* 31px */
+    --step-4: 2.441rem;  /* 39px */
 }
 
 /* スムーズスクロールと基本フォントサイズ */
@@ -37,27 +33,23 @@ body {
     background: linear-gradient(135deg, var(--thirdary-color) 0%, var(--secondary-color) 100%);
     min-height: 100vh;
 }
-/* --- ✨ リンクの基本スタイル --- */
-a {
-    color: var(--link-color);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px; /* 下線と文字の間に少し隙間を作る */
-    transition: color 0.2s ease-in-out; /* 色の変化を滑らかに */
-}
-a:hover {
-    color: var(--link-hover-color);
-}
-
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
 
 /* --- 見出しの相対的サイズ設定 --- */
 h1, h2, h3 {
-    line-height: 1.2;
+    line-height: 1.2; /* 見出しの行間を詰める */
     margin-bottom: 1rem;
 }
-h1 { font-size: clamp(var(--step-3), 6vw, var(--step-4)); }
-h2 { font-size: clamp(var(--step-2), 5vw, var(--step-3)); }
-h3 { font-size: clamp(var(--step-1), 4vw, var(--step-2)); }
+h1 {
+    font-size: clamp(var(--step-3), 6vw, var(--step-4));
+}
+h2 {
+    font-size: clamp(var(--step-2), 5vw, var(--step-3));
+}
+h3 {
+    font-size: clamp(var(--step-1), 4vw, var(--step-2));
+}
 
 
 /* ---------------
@@ -79,12 +71,9 @@ header {
     max-width: 1200px;
     margin: 0 auto;
 }
-header .logo { font-size: var(--step-1); }
-
-/* ✨ ヘッダー内のリンクは下線を消し、文字色を元に戻す */
-header a {
-    color: var(--word-color);
-    text-decoration: none;
+/* ヘッダー内のh1はロゴとして扱うため、少し小さくする */
+header .logo {
+    font-size: var(--step-1);
 }
 nav ul { display: flex; gap: 1.5rem; }
 
@@ -150,7 +139,7 @@ main img {
     border: none;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.8);
-    color: var(--word-color); /* ボタンの文字色 */
+    color: var(--word-color);
     cursor: pointer;
     font-size: 1rem;
     transition: all 0.2s;
@@ -199,12 +188,8 @@ main img {
     transition: all 0.3s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     z-index: 20;
-    text-decoration: none; /* ボタンなので下線は不要 */
 }
-.back-to-top-button:hover {
-    transform: scale(1.1);
-    color: #fff; /* ホバー時も文字色を維持 */
-}
+.back-to-top-button:hover { transform: scale(1.1); }
 .back-to-top-button.is-visible { opacity: 1; visibility: visible; }
 
 
