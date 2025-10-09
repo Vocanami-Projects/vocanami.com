@@ -69,6 +69,15 @@ main ul {
     margin-bottom: 2rem;
 }
 
+.tab-content {
+    text-align: left;
+    line-height: 1.8;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border: 2px solid var(--word-color);
+    border-radius: 10px;
+}
+
 .news-list li {
     list-style: inside;
     padding-left: 1rem;
