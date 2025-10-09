@@ -22,4 +22,7 @@
 ### 6. マージが完了したら、開発したブランチを削除する
 `git branch -d feature/update-readme`
 
+### 7. GitHub上のブランチも削除する
+`git push origin --delete feature/update-readme`
+
 ※ この一連の作業は、開発したブランチをリモートリポジトリに反映させるための作業です。
