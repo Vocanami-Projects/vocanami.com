@@ -1,0 +1,35 @@
+/*サイトの色は、湘南色(藍色のRGB値)を使う*/
+:root {
+    --primary-color: #0000FF;
+}
+
+/*ヘッダー*/
+.header {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/*メイン*/
+.main {
+    background-color: #fff;
+    color: #000;
+}
+
+/*フッター*/
+.footer {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/*ボタン*/
+.button {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+
+/*ボタンを押した時のエフェクト*/
+.button:active {
+    background-color: #000;
+    color: #fff;
+}
