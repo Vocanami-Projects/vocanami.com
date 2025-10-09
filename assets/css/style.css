@@ -1,0 +1,103 @@
+/* リセットCSS */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/*サイトの色は、湘南色(藍色のRGB値)を使う*/
+:root { --primary-color: #98b7fc; --word-color: #582285; --secondary-color: #92bea3e8; --thirdary-color: #f0efc9;}
+
+/* 全体的なスタイル */
+body { font-family: sans-serif; line-height: 1.6; color: var(--word-color); background-color: var(--secondary-color);}
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ---------------
+ * ヘッダー
+ * --------------- */
+header { background-color: var(--primary-color); padding: 1rem 2rem; border-bottom: 1px solid var(--word-color); }
+.header-inner { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+nav ul { display: flex; gap: 1.5rem; }
+
+/* ---------------
+ * フッター
+ * --------------- */
+footer {
+    background-color: var(--primary-color);
+    color: var(--word-color);
+    padding: 2rem 0;
+    text-align: center;
+}
+
+/* ---------------
+ * コンテンツ共通
+ * --------------- */
+ .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+main section {
+    padding: 4rem 0;
+    text-align: center;
+}
+
+main section:nth-of-type(odd) {
+    background-color: var(--thirdary-color);
+}
+
+main h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+main h3 {
+    font-size: 1.2rem;
+    color: var(--word-color);
+    margin-bottom: 2rem;
+}
+
+/* ---------------
+ * タブ切り替えコンテンツ
+ * --------------- */
+.tab-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.tab-button {
+    padding: 0.5rem 1.5rem;
+    border: 1px solid var(--thirdary-color);
+    border-radius: 999px; /* 丸いボタンにする */
+    background: var(--primary-color);
+    color: var(--word-color);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.tab-button.active,
+.tab-button:hover {
+    background: var(--secondary-color);
+    color: var(--word-color);
+    border-color: var(--secondary-color);
+}
+
+.tab-content {
+    text-align: left;
+    line-height: 1.8;
+}
+.tab-content ul {
+    list-style: inside;
+    padding-left: 1rem;
+    margin-top: 1rem;
+}
+
+/* JS用の表示・非表示スタイル */
+.tab-content {
+    display: none; /* デフォルトは非表示 */
+}
+
+.tab-content.active {
+    display: block; /* activeクラスがついたら表示 */
+}
