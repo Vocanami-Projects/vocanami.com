@@ -1,7 +1,23 @@
+/* リセットCSS */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 /*サイトの色は、湘南色(藍色のRGB値)を使う*/
 :root {
     --primary-color: #0000FF;
 }
+
+/* 全体的なスタイル */
+body {  
+    font-family: sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+ul { list-style: none; }
 
 /*ヘッダー*/
 .header {
