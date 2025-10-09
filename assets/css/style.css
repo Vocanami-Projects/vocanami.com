@@ -80,5 +80,11 @@ main h3 {
     margin-top: 1rem;
 }
 
-/* JSで切り替えるまでは、すべてのコンテンツが見えるようにしておく */
-.tab-content.hidden { display: none; }
+/* JS用の表示・非表示スタイル */
+.tab-content {
+    display: none; /* デフォルトは非表示 */
+}
+
+.tab-content.active {
+    display: block; /* activeクラスがついたら表示 */
+}
