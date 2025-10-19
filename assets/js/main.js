@@ -1,42 +1,50 @@
-// タブ切り替え機能
-const tabs = document.querySelectorAll('.tab-button');
-const contents = document.querySelectorAll('.tab-content');
+document.addEventListener("DOMContentLoaded", () => {
 
-tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-        // 全てのactiveクラスを一旦削除
-        tabs.forEach(t => t.classList.remove('active'));
-        contents.forEach(c => c.classList.remove('active'));
-
-        // クリックされたタブにactiveクラスを追加
-        tab.classList.add('active');
-        // 対応するコンテンツにactiveクラスを追加
-        const contentId = tab.dataset.tab;
-        document.getElementById(contentId).classList.add('active');
-    });
-});
-//ボタンを押した時のエフェクト
-document.addEventListener('DOMContentLoaded', function() {
-    const buttons = document.querySelectorAll('.button');
-    buttons.forEach(button => {
-        button.addEventListener('click', function() {
-            button.style.backgroundColor = 'var(--word-color)';
-            button.style.color = 'var(--secondary-color)';
+    // --- トップへ戻るボタン ---
+    // このボタンは最初からHTMLに存在するため、このままでOK
+    const backToTopButton = document.getElementById('back-to-top');
+    if (backToTopButton) { // ボタンの存在を確認してから処理
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                backToTopButton.classList.add('is-visible');
+            } else {
+                backToTopButton.classList.remove('is-visible');
+            }
         });
-    });
-});
+    }
 
-// --- トップへ戻るボタン ---
-const backToTopButton = document.getElementById('back-to-top');
 
-// ある程度スクロールしたらボタンを表示
-window.addEventListener('scroll', () => {
-    // 画面の上から200px以上スクロールしたら
-    if (window.scrollY > 200) {
-        // is-visibleクラスを付けて表示
-        backToTopButton.classList.add('is-visible');
-    } else {
-        // 200px未満の場合はis-visibleクラスを外して非表示
-        backToTopButton.classList.remove('is-visible');
+    // --- タブ切り替え機能（イベント委譲を使用） ---
+    // タブボタンは後から読み込まれるため、親要素である<main>でクリックを監視
+    const mainElement = document.querySelector('main');
+
+    if (mainElement) {
+        mainElement.addEventListener('click', (event) => {
+            // 1. クリックされたのがタブボタンか判定
+            const clickedTab = event.target.closest('.tab-button');
+            
+            // 2. タブボタンでなければ、何もしない
+            if (!clickedTab) {
+                return; 
+            }
+
+            // 3. 親コンテナ内の全てのタブとコンテンツから 'active' クラスを削除
+            const tabContainer = clickedTab.closest('.tab-container');
+            if (tabContainer) {
+                const allTabs = tabContainer.querySelectorAll('.tab-button');
+                const allContents = tabContainer.querySelectorAll('.tab-content');
+                
+                allTabs.forEach(tab => tab.classList.remove('active'));
+                allContents.forEach(content => content.classList.remove('active'));
+            }
+            
+            // 4. クリックされたタブと、対応するコンテンツに 'active' クラスを追加
+            clickedTab.classList.add('active');
+            const contentId = clickedTab.dataset.tab;
+            const targetContent = document.getElementById(contentId);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+        });
     }
 });
