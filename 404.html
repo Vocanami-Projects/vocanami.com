@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ページが見つかりません | ボカ波プロジェクト</title>
+    
+    <link rel="stylesheet" href="/assets/css/style.css">
+    
+    <style>
+        /* このページ専用のスタイル */
+        .error-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 2rem;
+        }
+        .error-page h1 {
+            margin-bottom: 1rem;
+        }
+        .error-page p {
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+        .error-page a {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="error-page">
+        <h1>404 Not Found</h1>
+        <p>
+            お探しのページは見つかりませんでした。<br>
+            URLが間違っているか、ページが移動・削除された可能性があります。
+        </p>
+        <p>
+            <span id="countdown">5</span>秒後に自動でトップページへ移動します。
+        </p>
+        <a href="/">すぐにトップページへ戻る</a>
+    </main>
+
+    <script>
+        // --- カウントダウンとリダイレクト処理 ---
+        const countdownElement = document.getElementById('countdown');
+        let seconds = 5; // カウントダウンの秒数
+
+        const countdownInterval = setInterval(() => {
+            seconds--;
+            countdownElement.textContent = seconds;
+
+            if (seconds <= 0) {
+                clearInterval(countdownInterval); // タイマーを停止
+                window.location.href = '/'; // トップページへリダイレクト
+            }
+        }, 1000); // 1秒ごとに実行
+    </script>
+
+</body>
+</html>
