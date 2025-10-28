@@ -315,3 +315,44 @@ main img {
 #access h3 {
     margin-top: 50px;
 }
+
+/* ================================== */
+/* セットリストページ用スタイル         */
+/* ================================== */
+.setlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.setlist-card {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(5px);
+}
+
+.setlist-card h2 {
+    text-align: center;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.setlist-card ol {
+    list-style-type: decimal;
+    list-style-position: inside;
+    padding-left: 0.5rem;
+}
+
+.setlist-card li {
+    text-align: left;
+    font-size: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed rgba(88, 34, 133, 0.2);
+}
+
+.setlist-card li:last-child {
+    border-bottom: none;
+}
