@@ -12,21 +12,28 @@
         <loc>https://vocanami.com/2025/srf/</loc>
         <lastmod>2025-12-24</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://vocanami.com/2025/srf/setlist/</loc>
+        <lastmod>2025-12-24</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.5</priority>
     </url>
 
     <url>
         <loc>https://vocanami.com/2025/shonan/</loc>
         <lastmod>2025-10-28</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
+        <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://vocanami.com/2025/shonan/setlist/</loc>
         <lastmod>2025-10-29</lastmod>
         <changefreq>never</changefreq>
-        <priority>0.5</priority>
+        <priority>0.2</priority>
     </url>
 
 </urlset>
