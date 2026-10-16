@@ -16,6 +16,13 @@
     </url>
 
     <url>
+        <loc>https://vocanami.com/shonan/</loc>
+        <lastmod>2026-10-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://vocanami.com/2025/</loc>
         <lastmod>2025-12-24</lastmod>
         <changefreq>yearly</changefreq>
