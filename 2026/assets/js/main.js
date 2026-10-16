@@ -104,10 +104,17 @@
   }
 
   /* ========================================================================
-     3. A103 98-SEAT GRID BUILDER
+     3. A103 98-SEAT GRID BUILDER (4 Desk Blocks: 2-3-3-2 + 3 Vertical Aisles)
      ======================================================================== */
   const seatedRowsContainer = document.getElementById('seatedRowsContainer');
   const standingRowsContainer = document.getElementById('standingRowsContainer');
+
+  const DESK_BLOCKS = [
+    { cols: [1, 2], className: 'desk-block desk-block--2' },
+    { cols: [3, 4, 5], className: 'desk-block desk-block--3' },
+    { cols: [6, 7, 8], className: 'desk-block desk-block--3' },
+    { cols: [9, 10], className: 'desk-block desk-block--2' }
+  ];
 
   function buildSeatRows() {
     if (!seatedRowsContainer || !standingRowsContainer) return;
@@ -124,27 +131,42 @@
       labelEl.textContent = `${r}列`;
       rowEl.appendChild(labelEl);
 
-      for (let c = 1; c <= 10; c++) {
-        const isPa = r === 10 && c >= 9;
-        const isSeated = r <= 4;
+      DESK_BLOCKS.forEach((block, bIdx) => {
+        const deskEl = document.createElement('div');
+        deskEl.className = block.className;
 
-        const cell = document.createElement('div');
-        if (isPa) {
-          cell.className = 'seat-cell seat-cell--pa';
-          cell.textContent = 'PA';
-          cell.title = `${r}列目 右側：PA機材席（着席不可）`;
-        } else if (isSeated) {
-          cell.className = 'seat-cell seat-cell--seated';
-          cell.textContent = '着席';
-          cell.title = `${r}列目：【着席指定席】座ってご鑑賞ください`;
-        } else {
-          cell.className = 'seat-cell seat-cell--standing';
-          cell.textContent = '立可';
-          cell.title = `${r}列目：【立ち席可エリア】立っても座っても鑑賞可能です`;
+        block.cols.forEach((c) => {
+          const isPa = r === 10 && c >= 9;
+          const isSeated = r <= 4;
+
+          const cell = document.createElement('div');
+          if (isPa) {
+            cell.className = 'seat-cell seat-cell--pa';
+            cell.textContent = 'PA';
+            cell.title = `${r}列目 右側：PA機材席（着席不可・当日変更の場合あり）`;
+          } else if (isSeated) {
+            cell.className = 'seat-cell seat-cell--seated';
+            cell.textContent = '着席';
+            cell.title = `${r}列目（予定）：【着席指定席】座ってご鑑賞ください`;
+          } else {
+            cell.className = 'seat-cell seat-cell--standing';
+            cell.textContent = '立可';
+            cell.title = `${r}列目（予定）：【立ち席可エリア】立っても座っても鑑賞可能です`;
+          }
+          deskEl.appendChild(cell);
+        });
+
+        rowEl.appendChild(deskEl);
+
+        // Insert vertical aisle between the 4 desk blocks (3 aisles total)
+        if (bIdx < DESK_BLOCKS.length - 1) {
+          const aisleEl = document.createElement('div');
+          aisleEl.className = 'seat-aisle-cell';
+          aisleEl.textContent = '通路';
+          aisleEl.title = '縦通路（立ち止まり禁止）';
+          rowEl.appendChild(aisleEl);
         }
-
-        rowEl.appendChild(cell);
-      }
+      });
 
       if (r <= 4) {
         seatedRowsContainer.appendChild(rowEl);
@@ -249,4 +271,208 @@
       }
     }
   });
+
+  /* ========================================================================
+     7. PAGINATED NEWS LOADER (_news/news-list.json, Max 5 per page, Expandable)
+     ======================================================================== */
+  const newsListContainer = document.getElementById('newsListContainer');
+  const newsFirstBtn = document.getElementById('newsFirstBtn');
+  const newsPrevBtn = document.getElementById('newsPrevBtn');
+  const newsNextBtn = document.getElementById('newsNextBtn');
+  const newsLastBtn = document.getElementById('newsLastBtn');
+  const newsPageStatus = document.getElementById('newsPageStatus');
+
+  const NEWS_PAGE_SIZE = 5;
+  let newsFiles = [];
+  let currentNewsPage = 1;
+  const newsCache = new Map();
+
+  function normalizeAssetUrl(rawUrl) {
+    if (!rawUrl) return '';
+    if (rawUrl.startsWith('/2026/') || rawUrl.startsWith('/2025/')) {
+      return '.' + rawUrl;
+    }
+    return rawUrl;
+  }
+
+  function parseNewsHtml(htmlString) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlString, 'text/html');
+    const h3 = doc.querySelector('h3');
+    const dateText = h3 ? h3.textContent.trim() : '';
+
+    const paragraphs = Array.from(doc.querySelectorAll('p'));
+    const headlineText = paragraphs.length > 0 ? paragraphs[0].textContent.trim() : 'お知らせ';
+
+    const detailNodes = [];
+    Array.from(doc.body.children).forEach((child, idx) => {
+      if (child.tagName === 'H3') return;
+      // Skip the first paragraph in the detail body only if it contains no links and there are other elements
+      if (child.tagName === 'P' && child === paragraphs[0] && !child.querySelector('a') && doc.body.children.length > 2) {
+        return;
+      }
+
+      if (child.tagName === 'IMG') {
+        const src = normalizeAssetUrl(child.getAttribute('src') || '');
+        const alt = child.getAttribute('alt') || headlineText;
+        const wrap = document.createElement('div');
+        wrap.className = 'news-item__media';
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = alt;
+        img.loading = 'lazy';
+        img.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openLightbox(src, alt);
+        });
+        wrap.appendChild(img);
+        detailNodes.push(wrap);
+      } else if (child.tagName === 'A' && child.querySelector('img')) {
+        const innerImg = child.querySelector('img');
+        const src = normalizeAssetUrl(innerImg.getAttribute('src') || '');
+        const alt = innerImg.getAttribute('alt') || headlineText;
+        const wrap = document.createElement('div');
+        wrap.className = 'news-item__media';
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = alt;
+        img.loading = 'lazy';
+        img.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openLightbox(src, alt);
+        });
+        wrap.appendChild(img);
+        detailNodes.push(wrap);
+      } else if (child.tagName === 'P') {
+        const p = document.createElement('p');
+        p.innerHTML = child.innerHTML;
+        p.querySelectorAll('a').forEach((a) => {
+          const href = a.getAttribute('href') || '';
+          a.setAttribute('href', normalizeAssetUrl(href));
+        });
+        detailNodes.push(p);
+      }
+    });
+
+    if (detailNodes.length === 0 && paragraphs.length > 0) {
+      const p = document.createElement('p');
+      p.textContent = headlineText;
+      detailNodes.push(p);
+    }
+
+    return { dateText, headlineText, detailNodes };
+  }
+
+  async function fetchNewsItem(filename) {
+    if (newsCache.has(filename)) {
+      return newsCache.get(filename);
+    }
+    const res = await fetch(`./_news/${filename}`);
+    if (!res.ok) throw new Error(`Failed to load ${filename}`);
+    const text = await res.text();
+    newsCache.set(filename, text);
+    return text;
+  }
+
+  async function renderNewsPage(page) {
+    if (!newsListContainer || newsFiles.length === 0) return;
+
+    const totalPages = Math.max(1, Math.ceil(newsFiles.length / NEWS_PAGE_SIZE));
+    currentNewsPage = Math.min(Math.max(1, page), totalPages);
+
+    const startIdx = (currentNewsPage - 1) * NEWS_PAGE_SIZE;
+    const slice = newsFiles.slice(startIdx, startIdx + NEWS_PAGE_SIZE);
+
+    if (newsFirstBtn) newsFirstBtn.disabled = currentNewsPage <= 1;
+    if (newsPrevBtn) newsPrevBtn.disabled = currentNewsPage <= 1;
+    if (newsNextBtn) newsNextBtn.disabled = currentNewsPage >= totalPages;
+    if (newsLastBtn) newsLastBtn.disabled = currentNewsPage >= totalPages;
+    if (newsPageStatus) newsPageStatus.textContent = `${currentNewsPage} / ${totalPages}`;
+
+    try {
+      const htmlList = await Promise.all(slice.map((file) => fetchNewsItem(file)));
+      newsListContainer.innerHTML = '';
+
+      htmlList.forEach((rawHtml, idx) => {
+        const { dateText, headlineText, detailNodes } = parseNewsHtml(rawHtml);
+
+        const itemEl = document.createElement('article');
+        itemEl.className = 'news-item';
+        if (currentNewsPage === 1 && idx === 0) {
+          itemEl.classList.add('is-expanded');
+        }
+
+        const summaryBtn = document.createElement('button');
+        summaryBtn.type = 'button';
+        summaryBtn.className = 'news-item__summary';
+        summaryBtn.setAttribute('aria-expanded', itemEl.classList.contains('is-expanded') ? 'true' : 'false');
+
+        const dateSpan = document.createElement('span');
+        dateSpan.className = 'news-item__date';
+        dateSpan.textContent = dateText;
+
+        const headlineSpan = document.createElement('span');
+        headlineSpan.className = 'news-item__headline';
+        headlineSpan.textContent = headlineText;
+
+        const iconSpan = document.createElement('span');
+        iconSpan.className = 'news-item__toggle-icon';
+        iconSpan.setAttribute('aria-hidden', 'true');
+        iconSpan.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+
+        summaryBtn.appendChild(dateSpan);
+        summaryBtn.appendChild(headlineSpan);
+        summaryBtn.appendChild(iconSpan);
+
+        const detailDiv = document.createElement('div');
+        detailDiv.className = 'news-item__detail';
+        detailNodes.forEach((node) => detailDiv.appendChild(node));
+
+        summaryBtn.addEventListener('click', () => {
+          const expanded = itemEl.classList.toggle('is-expanded');
+          summaryBtn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        });
+
+        itemEl.appendChild(summaryBtn);
+        itemEl.appendChild(detailDiv);
+        newsListContainer.appendChild(itemEl);
+      });
+    } catch (err) {
+      // Fallback if opened via file:// protocol where fetch may be restricted
+      console.warn('News fetch fallback:', err);
+    }
+  }
+
+  async function initNewsLoader() {
+    if (!newsListContainer) return;
+    try {
+      const res = await fetch('./_news/news-list.json');
+      if (!res.ok) return;
+      const list = await res.json();
+      if (Array.isArray(list) && list.length > 0) {
+        newsFiles = list;
+        await renderNewsPage(1);
+      }
+    } catch (err) {
+      console.warn('Could not load news-list.json:', err);
+    }
+
+    if (newsFirstBtn) {
+      newsFirstBtn.addEventListener('click', () => renderNewsPage(1));
+    }
+    if (newsPrevBtn) {
+      newsPrevBtn.addEventListener('click', () => renderNewsPage(currentNewsPage - 1));
+    }
+    if (newsNextBtn) {
+      newsNextBtn.addEventListener('click', () => renderNewsPage(currentNewsPage + 1));
+    }
+    if (newsLastBtn) {
+      newsLastBtn.addEventListener('click', () => {
+        const totalPages = Math.max(1, Math.ceil(newsFiles.length / NEWS_PAGE_SIZE));
+        renderNewsPage(totalPages);
+      });
+    }
+  }
+
+  initNewsLoader();
 })();

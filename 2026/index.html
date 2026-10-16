@@ -61,7 +61,7 @@
   <!-- Header -->
   <header class="site-header">
     <div class="site-header__inner">
-      <a href="../index.html" class="brand">
+      <a href="../" class="brand">
         <img src="./assets/img/icon-2026.png" alt="湘南ボカ波2026 アイコン" class="brand__icon" width="42" height="42">
         <div class="brand__text">
           <span class="brand__sub">SHONAN VOCANAMI 2026</span>
@@ -80,7 +80,7 @@
         <a href="#posters" class="site-nav__link">案内ポスター</a>
         <a href="#access" class="site-nav__link">アクセス</a>
         <a href="#credits" class="site-nav__link">運営・協力</a>
-        <a href="../index.html" class="site-nav__cta">プロジェクトTOP</a>
+        <a href="../" class="site-nav__cta">プロジェクトTOP</a>
       </nav>
     </div>
   </header>
@@ -289,20 +289,114 @@
         </div>
 
         <div class="venue-layout">
-          <!-- Left: Accurate A103 Floor Map Image (Click to enlarge) -->
+          <!-- Left: Interactive HTML/CSS Diagram matching Poster 05 -->
           <div class="a103-map-box">
-            <div class="hero-visual__frame"
-                 style="max-width: 100%;"
-                 data-lightbox-src="./assets/img/a103-floor-map.png"
-                 data-lightbox-title="A103教室 フロア・座席・通路マップ">
-              <img src="./assets/img/a103-floor-map.png"
-                   alt="A103教室 フロア・座席・通路マップ"
-                   width="800" height="1560"
-                   loading="lazy">
+            <div class="a103-diagram" aria-label="A103教室 座席・通路・出入口マップ">
+              <!-- Front Area: Closed Front Door + Stage Equipment -->
+              <div class="a103-front-row">
+                <div class="a103-door-closed">
+                  <span>× 前方ドア</span>
+                  <small>（閉鎖・使用不可）</small>
+                </div>
+                <div class="a103-stage">
+                  <div class="a103-stage__en">STAGE // POLID SCREEN &amp; AUDIO &amp; LIGHTING</div>
+                  <div class="a103-stage__jp">ステージ（ポリッドスクリーン・スピーカー・照明）</div>
+                </div>
+              </div>
+
+              <!-- Front Equipment Zone -->
+              <div class="a103-equip-zone">
+                <strong>▲ 前方5〜6列（立入不可・機材設置エリア）</strong>
+                <span>※スクリーン投影・音響・照明設置のため前方列は使用しません（最前列位置や装飾は当日確定）</span>
+              </div>
+
+              <!-- Classroom Body with Side Wall Pillars -->
+              <div class="a103-room-body">
+                <div class="a103-pillars a103-pillars--left" aria-hidden="true">
+                  <span class="a103-pillar" title="左壁面の柱"></span>
+                  <span class="a103-pillar" title="左壁面の柱"></span>
+                  <span class="a103-pillar" title="左壁面の柱"></span>
+                </div>
+                <div class="a103-pillars a103-pillars--right" aria-hidden="true">
+                  <span class="a103-pillar" title="右壁面の柱"></span>
+                  <span class="a103-pillar" title="右壁面の柱"></span>
+                  <span class="a103-pillar" title="右壁面の柱"></span>
+                </div>
+
+                <!-- Audience Area (4 Desk Blocks: 2-3-3-2 + 3 Vertical Aisles) -->
+                <div class="a103-audience-frame">
+                  <div class="a103-audience-frame__head">
+                    <span class="a103-audience-frame__title">【観客エリア】全10列・約98席（予定）</span>
+                    <span class="a103-audience-frame__sub">4ブロック机配置（2席・3席・3席・2席）× 3本の縦通路</span>
+                  </div>
+
+                  <div class="seat-col-headers" aria-hidden="true">
+                    <span></span>
+                    <span class="seat-col-headers__desk">机 2席</span>
+                    <span class="seat-col-headers__aisle">通路</span>
+                    <span class="seat-col-headers__desk">机 3席</span>
+                    <span class="seat-col-headers__aisle">通路</span>
+                    <span class="seat-col-headers__desk">机 3席</span>
+                    <span class="seat-col-headers__aisle">通路</span>
+                    <span class="seat-col-headers__desk">机 2席</span>
+                  </div>
+
+                  <!-- Seated Zone (Rows 1-4) -->
+                  <div class="a103-zone a103-zone--seated">
+                    <div class="a103-zone__header">
+                      <div class="a103-zone__title">
+                        <span>【前方4列（予定）】着席指定席</span>
+                        <small style="font-size: 0.72rem; font-weight: normal; margin-left: 6px;">（座ってご鑑賞ください）</small>
+                      </div>
+                      <span class="a103-zone__badge">約40席</span>
+                    </div>
+                    <div class="seat-rows" id="seatedRowsContainer"></div>
+                  </div>
+
+                  <!-- Standing OK Zone (Rows 5-10) -->
+                  <div class="a103-zone a103-zone--standing">
+                    <div class="a103-zone__header">
+                      <div class="a103-zone__title">
+                        <span>【後方6列（予定）】立ち席可エリア</span>
+                        <small style="font-size: 0.72rem; font-weight: normal; margin-left: 6px;">（立っても座ってもOK ／ 最後列右2席はPA用）</small>
+                      </div>
+                      <span class="a103-zone__badge">約58席</span>
+                    </div>
+                    <div class="seat-rows" id="standingRowsContainer"></div>
+                  </div>
+                </div>
+
+                <!-- Rear Horizontal Passage directly behind Row 10 + Right PA Extension -->
+                <div class="a103-rear-passage-row">
+                  <div class="a103-horiz-aisle">
+                    ← 後方横通路（出入口から各縦通路への連絡通路） →
+                  </div>
+                  <div class="a103-pa-neck">
+                    ▲ PA機材席
+                  </div>
+                </div>
+
+                <!-- Rear Bottom Row: Entrance + Passage + PA Booth -->
+                <div class="a103-rear-row">
+                  <div class="a103-entrance-open">
+                    <strong>唯一の出入口</strong>
+                    <span>後方左ドア（開口）</span>
+                    <small style="font-size: 0.65rem; color: #fff3eb; margin-top: 2px;">入退場・途中入場口</small>
+                  </div>
+                  <div class="a103-rear-aisle">
+                    <span>↑<br>出入口前<br>通路</span>
+                  </div>
+                  <div class="a103-pa-booth">
+                    <strong>PA・カメラ・照明音響卓ブース（立入禁止）</strong>
+                    <span>後方右側〜中央寄り（客通路幅を確保した範囲）</span>
+                    <small style="font-size: 0.65rem; color: #fff5d6; margin-top: 2px;">※PA割り当て席数・範囲は当日微調整の場合あり</small>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div style="margin-top: 12px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px;">
-              <span style="font-size: 0.8rem; font-weight: 700; color: var(--c-muted);">※マップ画像をクリックすると拡大表示されます</span>
+              <span style="font-size: 0.78rem; font-weight: 700; color: var(--c-muted);">※壁際の黒い四角は教室の柱位置を示しています</span>
               <button type="button" class="poster-btn" style="display: inline-block; width: auto; padding: 6px 14px; flex: none;"
                       data-lightbox-src="./assets/img/posters/05_seat_and_entrance_map.png"
                       data-lightbox-title="A103教室 座席・通路・出入口のご案内ポスター">
@@ -914,7 +1008,7 @@
         </div>
 
         <div class="site-footer__copy">
-          <p>&copy; <a href="../2025/index.html" class="secret-archive-link" title="2025">2025</a>–2026 ボカ波プロジェクト (vocanami). All Rights Reserved.</p>
+          <p>&copy; <a href="../2025/" class="secret-archive-link" title="2025">2025</a>–2026 ボカ波プロジェクト (vocanami). All Rights Reserved.</p>
           <p style="font-size: 0.75rem; margin-top: 4px;">
             ※本イベントはボカロファンによるボカロファンのための非公式イベントです。
           </p>
