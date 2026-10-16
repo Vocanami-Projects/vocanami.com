@@ -5,68 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ページが見つかりません | ボカ波プロジェクト</title>
     
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="icon" href="assets/img/favicon.png?v=20251010081031">
+    <link rel="icon" href="/2025/assets/img/favicon.png?v=20251010081031">
     
     <style>
-        /* このページ専用のスタイル */
-        .error-page {
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            background: #0f141c;
+            color: #e6edf3;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
             text-align: center;
             padding: 2rem;
         }
-        .error-page h1 {
+        .error-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            max-width: 540px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #00f0ff;
             margin-bottom: 1rem;
+            letter-spacing: 0.05em;
         }
-        .error-page p {
+        p {
+            line-height: 1.8;
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+        }
+        .countdown-notice {
+            font-size: 0.95rem;
+            color: #64748b;
             margin-bottom: 2rem;
-            max-width: 500px;
         }
-        .error-page a {
+        .countdown-notice span {
+            color: #38bdf8;
             font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #00f0ff 0%, #0284c7 100%);
+            color: #041019;
+            font-weight: bold;
+            padding: 0.8rem 2rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 240, 255, 0.3);
         }
     </style>
 </head>
 <body>
-
-    <header></header>
-    <main class="error-page">
+    <main class="error-card">
         <h1>404 Not Found</h1>
         <p>
             お探しのページは見つかりませんでした。<br>
-            URLが間違っているか、ページが移動・削除された可能性があります。
+            URLが変更されたか、ページが移動した可能性があります。
         </p>
-        <p>
-            <span id="countdown">5</span>秒後に自動でトップページへ移動します。
+        <p class="countdown-notice">
+            <span id="countdown">5</span> 秒後に自動でトップページへ移動します。
         </p>
-        <a href="/">すぐにトップページへ戻る</a>
+        <a href="/" class="btn">トップページへ戻る</a>
     </main>
 
-    <footer></footer>
-
-    <script src="/assets/js/layout.js"></script>
-    <script src="/assets/js/main.js"></script>
-
-
     <script>
-        // --- カウントダウンとリダイレクト処理 ---
         const countdownElement = document.getElementById('countdown');
-        let seconds = 5; // カウントダウンの秒数
+        let seconds = 5;
 
         const countdownInterval = setInterval(() => {
             seconds--;
-            countdownElement.textContent = seconds;
+            if (countdownElement) {
+                countdownElement.textContent = seconds;
+            }
 
             if (seconds <= 0) {
-                clearInterval(countdownInterval); // タイマーを停止
-                window.location.href = '/'; // トップページへリダイレクト
+                clearInterval(countdownInterval);
+                window.location.href = '/';
             }
-        }, 1000); // 1秒ごとに実行
+        }, 1000);
     </script>
-
 </body>
 </html>

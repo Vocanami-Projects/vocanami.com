@@ -1,4 +1,4 @@
-// layout.js
+// 2025/assets/js/layout.js
 
 /**
  * 指定された要素内にある [data-include] 属性を持つすべての要素を検索し、
@@ -8,13 +8,15 @@
  * @param {HTMLElement} parentElement - 処理の対象となる親要素。
  */
 async function processIncludes(parentElement) {
+    if (!parentElement) return;
+
     // 親要素の中から、まだ処理されていない [data-include] をすべて探す
     const elementsToInclude = parentElement.querySelectorAll('[data-include]');
 
     // 対象がなければ、処理を終了（再帰の停止条件）
     if (elementsToInclude.length === 0) return;
 
-    //見つかったすべての要素を並行して処理
+    // 見つかったすべての要素を並行して処理
     const promises = Array.from(elementsToInclude).map(async (el) => {
         const filePath = el.getAttribute('data-include');
         
@@ -47,22 +49,40 @@ async function processIncludes(parentElement) {
 
 // ページの基本構造が読み込まれたら、処理を開始
 document.addEventListener("DOMContentLoaded", () => {
-    // 最初にヘッダーとフッターを読み込む（これは今まで通り）
-    const loadHeader = fetch('/_partials/header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.querySelector("header").innerHTML = data;
-        });
+    // 2025年専用のヘッダーとフッターを読み込む
+    const headerEl = document.querySelector("header");
+    const footerEl = document.querySelector("footer");
 
-    const loadFooter = fetch('/_partials/footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.querySelector("footer").innerHTML = data;
-        });
+    const loadHeader = headerEl 
+        ? fetch('/2025/_partials/header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Header load failed');
+                return response.text();
+            })
+            .then(data => {
+                headerEl.innerHTML = data;
+            })
+            .catch(err => console.error('Failed to load header:', err))
+        : Promise.resolve();
+
+    const loadFooter = footerEl 
+        ? fetch('/2025/_partials/footer.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Footer load failed');
+                return response.text();
+            })
+            .then(data => {
+                footerEl.innerHTML = data;
+            })
+            .catch(err => console.error('Failed to load footer:', err))
+        : Promise.resolve();
 
     // ヘッダーとフッターの読み込みが終わったら、
     // <main>タグの中を対象に、再帰的な読み込み処理を開始する
     Promise.all([loadHeader, loadFooter]).then(() => {
-        processIncludes(document.querySelector('main'));
+        const main = document.querySelector('main');
+        if (main) {
+            processIncludes(main);
+        }
     });
 });
