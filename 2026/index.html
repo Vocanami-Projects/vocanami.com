@@ -132,7 +132,7 @@
               <div class="spec-card">
                 <span class="spec-card__label">会場</span>
                 <div class="spec-card__value">湘南工科大学 A103教室</div>
-                <div class="spec-card__sub">出入口：後方左の1か所のみ（全98席）</div>
+                <div class="spec-card__sub">出入口：後方左の1か所のみ（約98席予定）</div>
               </div>
 
               <div class="spec-card">
@@ -144,7 +144,7 @@
               <div class="spec-card">
                 <span class="spec-card__label">座席エリア区分</span>
                 <div class="spec-card__value">前方：着席指定 ／ 後方：立ち席可</div>
-                <div class="spec-card__sub">前方4列(40席) 着席指定・後方6列(58席) 立ち席可</div>
+                <div class="spec-card__sub">前方4列予定：着席指定・後方列：立ち席可</div>
               </div>
             </div>
 
@@ -282,103 +282,68 @@
       <div class="container">
         <div class="sec-head">
           <span class="sec-head__label">FLOOR &amp; SEATING MAP</span>
-          <h2 class="sec-head__title">A103教室 座席・出入口マップ</h2>
+          <h2 class="sec-head__title">A103教室 座席・通路・出入口マップ</h2>
           <p class="sec-head__desc">
-            客席は全98席（前方4列：着席指定 ／ 後方6列：立ち席可）です。出入口は後方左の1か所のみとなります。
+            客席は前方4列予定が「着席指定」、後方列が「立ち席可」（計約98席予定）です。出入口は後方左の1か所のみとなります。
           </p>
         </div>
 
         <div class="venue-layout">
-          <!-- Left: A103 Floor Diagram -->
+          <!-- Left: Accurate A103 Floor Map Image (Click to enlarge) -->
           <div class="a103-map-box">
-            <div class="a103-diagram">
-              <div class="a103-front-row">
-                <div class="a103-door-closed">
-                  <span>× 前方出入口</span>
-                  <small>【使用不可】</small>
-                </div>
-                <div class="a103-stage">
-                  <div class="a103-stage__en">STAGE &amp; SCREEN</div>
-                  <div class="a103-stage__jp">前方ステージ・スクリーン</div>
-                </div>
-              </div>
-
-              <div class="a103-equip-zone">
-                <strong>前方5〜6列閉鎖：スクリーン・音響（スピーカー）・照明配置エリア</strong>
-                <span>※機材および映像投影スペースのため、立ち入り・着席はできません</span>
-              </div>
-
-              <div class="a103-zone a103-zone--seated">
-                <div class="a103-zone__header">
-                  <span class="a103-zone__title">■ 前方 1〜4列目：【着席指定席】（必ず座ってご鑑賞ください）</span>
-                  <span class="a103-zone__badge">40席</span>
-                </div>
-                <div class="seat-rows" id="seatedRowsContainer"></div>
-              </div>
-
-              <div class="a103-zone a103-zone--standing">
-                <div class="a103-zone__header">
-                  <span class="a103-zone__title">■ 後方 5〜10列目：【立ち席可エリア】（※10列目右2席はPA席）</span>
-                  <span class="a103-zone__badge">58席 ＋ PA2席</span>
-                </div>
-                <div class="seat-rows" id="standingRowsContainer"></div>
-              </div>
-
-              <div class="a103-rear-row">
-                <div class="a103-entrance-open">
-                  <strong>&larr; 唯一の出入口</strong>
-                  <span>【後方左 1か所のみ】</span>
-                </div>
-                <div class="a103-rear-aisle">
-                  入退場<br>通路
-                </div>
-                <div class="a103-pa-booth">
-                  <strong>PA・カメラ・機材ブース（立ち入り禁止）</strong>
-                  <span>※後方右側〜中央やや左および10列目右2席は運営機材エリアです</span>
-                </div>
-              </div>
+            <div class="hero-visual__frame"
+                 style="max-width: 100%;"
+                 data-lightbox-src="./assets/img/a103-floor-map.png"
+                 data-lightbox-title="A103教室 フロア・座席・通路マップ">
+              <img src="./assets/img/a103-floor-map.png"
+                   alt="A103教室 フロア・座席・通路マップ"
+                   width="800" height="1560"
+                   loading="lazy">
             </div>
 
-            <div style="margin-top: 12px; text-align: right;">
-              <button type="button" class="poster-btn" style="display: inline-block; width: auto; padding: 6px 14px;"
+            <div style="margin-top: 12px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px;">
+              <span style="font-size: 0.8rem; font-weight: 700; color: var(--c-muted);">※マップ画像をクリックすると拡大表示されます</span>
+              <button type="button" class="poster-btn" style="display: inline-block; width: auto; padding: 6px 14px; flex: none;"
                       data-lightbox-src="./assets/img/posters/05_seat_and_entrance_map.png"
-                      data-lightbox-title="A103教室 座席・出入口のご案内ポスター">
-                座席・出入口案内ポスターを拡大表示
+                      data-lightbox-title="A103教室 座席・通路・出入口のご案内ポスター">
+                案内ポスター全体を表示
               </button>
             </div>
           </div>
 
-          <!-- Right: Seat & Entrance Details -->
+          <!-- Right: Seat, Passage & Entrance Details -->
           <div class="venue-details">
             <div class="v-card">
-              <h3 class="v-card__title">座席エリア区分（全98席）</h3>
+              <h3 class="v-card__title">座席エリア区分（約98席予定）</h3>
               <div class="v-stat-grid">
                 <div class="v-stat">
-                  <div class="v-stat__num">98<small>席</small></div>
-                  <div class="v-stat__label">客席合計</div>
+                  <div class="v-stat__num">約98<small>席</small></div>
+                  <div class="v-stat__label">客席合計（予定）</div>
                 </div>
                 <div class="v-stat" style="border-color: var(--c-blue); background: var(--c-blue-pale);">
-                  <div class="v-stat__num" style="color: var(--c-blue);">40<small>席</small></div>
-                  <div class="v-stat__label">前方4列：着席指定</div>
+                  <div class="v-stat__num" style="color: var(--c-blue);">前方4<small>列</small></div>
+                  <div class="v-stat__label">着席指定（約40席）</div>
                 </div>
                 <div class="v-stat" style="border-color: var(--c-plum); background: var(--c-plum-pale);">
-                  <div class="v-stat__num" style="color: var(--c-plum);">58<small>席</small></div>
-                  <div class="v-stat__label">後方6列：立ち席可</div>
+                  <div class="v-stat__num" style="color: var(--c-plum);">後方<small>列</small></div>
+                  <div class="v-stat__label">立ち席可（約58席）</div>
                 </div>
               </div>
               <ul class="v-list">
-                <li><strong>着席指定席（前方1〜4列目・40席）：</strong>後方のお客様の視界確保のため、必ず着席してご鑑賞ください。</li>
-                <li><strong>立ち席可エリア（後方5〜10列目・58席）：</strong>立って盛り上がっても、座ってご鑑賞いただいても構いません。</li>
-                <li><strong>PA・カメラブース（後方右側・10列目右2席）：</strong>最後列（10列目）の右側2席および後方中央やや左〜右側のスペースは、音響・映像・カメラ機材ブースとなるため立ち入りできません。</li>
+                <li><strong>4ブロック×3縦通路の座席配置：</strong>各列は左から「2席・縦通路・3席・縦通路・3席・縦通路・2席」の4ブロック（1列あたり10席）で構成されています。</li>
+                <li><strong>着席指定席（観客エリア前方4列予定・約40席）：</strong>後方のお客様の視界確保のため、必ず着席してご鑑賞ください。</li>
+                <li><strong>立ち席可エリア（観客エリア後方列・約58席）：</strong>立って盛り上がっても、座ってご鑑賞いただいても構いません。</li>
+                <li><strong>前方閉鎖エリア（前方5〜6列予定）：</strong>ポリッドスクリーン・スピーカー・照明機器等の配置スペースとなるため立ち入りできません。</li>
+                <li><strong>PA・カメラ・機材ブース（後方右側〜中央やや左・後方右端席）：</strong>最後列右端の備え付け席（2席予定）および後方右側〜半分より少し左までの壁沿いスペースは、PA・カメラ・機材エリアとなるため立ち入りできません。</li>
               </ul>
             </div>
 
             <div class="v-card">
-              <h3 class="v-card__title">出入口・ご移動に関するご案内</h3>
+              <h3 class="v-card__title">出入口・通路・設営に関するご案内</h3>
               <ul class="v-list">
-                <li><strong>出入口は「後方左の1か所のみ」：</strong>ご入退場は教室後方左側の扉1か所のみとなります。</li>
-                <li><strong style="color: var(--c-red);">前方出入口は使用いたしません：</strong>ステージおよびスクリーン・機材配置のため、教室前方の扉からは出入りできません。</li>
-                <li><strong>エリア表示について：</strong>会場内の座席には「着席指定」と「立ち席可」が視覚的にわかるよう色分け表示を行っております。現地の表示に従ってご鑑賞ください。</li>
+                <li><strong>出入口は「後方左の1か所のみ」：</strong>ご入退場は教室後方左側の扉1か所のみとなります。教室前方の出入口は使用いたしません。</li>
+                <li><strong>通路のご利用について：</strong>後方左の出入口から入場後、最後列机のすぐ後ろの横通路（PAブース手前の通路）を通って、机の間の3本の縦通路より各座席へご移動ください。教室両端の壁際（柱周辺）は客席通路ではありません。</li>
+                <li><strong>当日の設営状況による変更について：</strong>実際の機材配置等により、座れる最前列の位置やPAに割り当てる備え付け席数、壁際等の装飾の有無が一部前後・変更となる場合がございます。当日は現地の座席区分表示およびスタッフの案内に従ってご鑑賞ください。</li>
               </ul>
             </div>
           </div>

@@ -24,7 +24,7 @@
     { tag: 'INFO', text: 'INITIALIZING SHONAN VOCANAMI 2026 SYSTEM...', pct: 18 },
     { tag: 'OK',   text: 'VENUE: SHONAN INSTITUTE OF TECHNOLOGY // BLDG-A [A103]', pct: 38 },
     { tag: 'OK',   text: 'SCHEDULE: 2026.10.31(SAT) - 11.01(SUN) [10:00~ / 14:30~]', pct: 60 },
-    { tag: 'OK',   text: 'SEAT MAP: 98 SEATS (ROW 1-4 SEATED / ROW 5-10 STANDING OK)', pct: 82 },
+    { tag: 'OK',   text: 'SEAT MAP: A103 FLOOR (FRONT SEATED / REAR STANDING OK)', pct: 82 },
     { tag: 'OK',   text: 'READY. OPENING PAGE...', pct: 100 }
   ];
 
